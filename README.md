@@ -8,6 +8,7 @@ Dashboard created for business registration, using angle 6 and firebase/firesotr
   - Angular cli
   - AngularFire 2
   - Bootstrap 4 (css)
+  - AGM (google maps)
   - Angular Material
   - ngx-file-drop
   - ngx-perfect-scrollbar
