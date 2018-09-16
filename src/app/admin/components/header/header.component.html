@@ -1,0 +1,36 @@
+<nav class="navbar navbar-absolute">
+  <div class="container-fluid">
+    <div class="navbar-minimize">
+      <div class="menu-add">
+        <button mat-mini-fab mat-button [matMenuTriggerFor]="menu" id="minimizeSidebar">
+          <i class="material-icons visible-on-sidebar-regular" matTooltip="Adicionar">add</i>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Nova Empresa</button>
+          <button mat-menu-item>Nova Cidade</button>
+          <!--<button mat-menu-item>Novo Usuário</button>-->
+        </mat-menu>
+      </div>
+    </div>
+
+    <ul class="nav justify-content-end nav-header">
+      <li class="nav-item">
+        <i class="material-icons alert-icon" matTooltip="Notificação" mat-button [matMenuTriggerFor]="alert" matBadge="1" matBadgeColor="warn">notifications</i>
+
+        <mat-menu #alert="matMenu">
+          <button mat-menu-item>Notificação</button>
+        </mat-menu>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink=""><i class="material-icons" matTooltip="Perfil">person</i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" routerLink=""><i class="material-icons" matTooltip="Site">home</i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" (click)="sair()"><i class="material-icons" matTooltip="Sair">exit_to_app</i></a>
+      </li>
+    </ul>
+  </div>
+</nav>

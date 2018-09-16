@@ -1,0 +1,50 @@
+.navbar-absolute {
+  border-bottom: 1px solid #e7e7e7;
+  z-index: 998;
+  position: absolute;
+  padding: 10px 0px;
+  width: 100%;
+  background-color: transparent;
+  box-shadow: none;
+
+  .nav-header {
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: #999;
+      height: 50px;
+      font-size: 1em;
+      line-height: 30px;
+      padding: .625rem 0;
+      font-weight: 300;
+      margin-left: 1rem;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+  .alert-icon {
+    color: #999;
+    cursor: pointer;
+  }
+  .nav-item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar-minimize {
+    float: left;
+    padding: 3px 0 0 15px;
+    display: flex;
+    align-items: center;
+  }
+  #minimizeSidebar {
+    background-color: #fff;
+    color: #999;
+  }
+}

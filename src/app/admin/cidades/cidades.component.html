@@ -1,0 +1,23 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="d-flex align-items-stretch flex-wrap">
+      <div class="col-sm-6 col-md-4" *ngFor="let cidade of cidades | async">
+        <div class="card card-cidade">
+          <div class="card-header card-header-icon">
+            <div class="card-text card-icon">
+              <i class="material-icons">landscape</i>
+            </div>
+            <h1>{{cidade.title}}</h1>
+          </div>
+          <div class="card-body" [innerHTML]="cidade.content | excerpt:200">
+          </div>
+          <div class="card-footer">
+            <!--<i class="material-icons color-view">remove_red_eye</i>-->
+            <button mat-icon-button (click)="editarCidade(cidade?.id)"><i class="material-icons color-edit" matTooltip="Editar">edit</i></button>
+            <button mat-icon-button (click)="deleteCidade(cidade?.id, cidade?.title)"><i class="material-icons color-delete" matTooltip="Deletar">delete</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

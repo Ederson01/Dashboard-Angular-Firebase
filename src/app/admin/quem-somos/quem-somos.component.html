@@ -1,0 +1,26 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-text">
+          <h1>Quem Somos</h1>
+        </div>
+      </div>
+      <form [formGroup]="pageForm">
+        <div class="card-body">
+          <mat-form-field class="col-sm-12">
+            <input matInput placeholder="Titulo" formControlName="title">
+          </mat-form-field>
+        </div>
+
+        <div class="card-body">
+          <quill-editor [style]="{height: '250px'}" formControlName="content"></quill-editor>
+        </div>
+
+        <div class="card-footer">
+          <button type="submit" class="btn-form" (click)="salvar()" mat-raised-button>Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

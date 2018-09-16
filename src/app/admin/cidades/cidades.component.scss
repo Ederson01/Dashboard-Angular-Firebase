@@ -1,0 +1,9 @@
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid #e7e7e7 !important;
+}
+.card-cidade {
+  height: calc(100% - 30px);
+}

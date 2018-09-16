@@ -1,0 +1,60 @@
+<div class="main-content">
+  <div class="container">
+    <div class="card"  *ngIf="auth.user | async as user">
+      <div class="card-header">
+        <div class="card-text">
+          <h1>{{ user.nome }} {{ user.sobrenome }}</h1>
+        </div>
+      </div>
+      <form [formGroup]="usuarioForm" class="d-flex align-items-stretch flex-wrap">
+        <div class="card-body col-sm-4 avatar-user">
+          <div class="avatar-upload">
+            <div class="avatar-edit" (click)="selectFile(false, usuarioForm.value.photoURL)">
+              <label for="imageUpload"><i class="material-icons">add_a_photo</i></label>
+            </div>
+            <div class="avatar-preview">
+              <img [src]="usuarioForm.value.photoURL ? usuarioForm.value.photoURL.url : 'https://firebasestorage.googleapis.com/v0/b/guia-sul-de-minhas.appspot.com/o/users%2Fno-image.png?alt=media&token=929b9f49-d17b-4bdf-ac12-e2dd8b5c5e99'" class="imgPlaceholder">
+            </div>
+          </div>
+        </div>
+        <div class="card-body col-sm-8">
+          <mat-form-field class="col-12">
+            <input matInput placeholder="Nome" formControlName="nome">
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <input matInput placeholder="Sobrenome" formControlName="sobrenome">
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <input matInput placeholder="Telefone" [dropSpecialCharacters]="false" [mask]="tel ? '(00) 0000-0000' : '(00) 0 0000-0000'" formControlName="telefone">
+            <mat-icon matSuffix (click)="tel = !tel">{{tel ? 'phone' : 'smartphone'}}</mat-icon>
+            <mat-hint align="start">Clique no ícone para alternar entre <strong>Fixo</strong> e <strong>Celular</strong></mat-hint>
+          </mat-form-field>
+
+          <div class="campos-conta">
+            <mat-form-field class="col-12">
+              <input matInput disabled placeholder="E-mail" [value]="user.email">
+            </mat-form-field>
+            
+            <!--<mat-form-field class="col-12">
+              <input matInput type="email" placeholder="E-mail" formControlName="email" type="email" required>
+              <mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+              <input matInput placeholder="Senha" [type]="hide ? 'text' : 'password'" formControlName="password" required>
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="formErrors.password">{{ formErrors.password }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+              <input matInput placeholder="Confirmar Senha" type="password" formControlName="confirm" required>
+            </mat-form-field>-->
+          </div>
+          <button mat-flat-button color="primary" class="btn-salvar" (click)="salvar()">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

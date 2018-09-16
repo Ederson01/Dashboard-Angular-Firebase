@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+}
+.btn-action {
+  width: 30px;
+  height: 30px;
+  margin: 0px 5px;
+  line-height: 30px;
+
+  i {
+    font-size: 16px;
+    margin-top: -8px;
+  }
+}
+.text-card {
+  display: inline-block;
+}
+.pesquisar-empresa {
+  display: inline-block;
+  float: right;
+}

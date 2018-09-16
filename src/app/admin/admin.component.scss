@@ -1,0 +1,66 @@
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+.menu {
+  background-color: rgba(38, 41, 58, 0.9);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  height: 100%;
+  max-height: 100%;
+  box-shadow: 0 16px 38px -12px rgba(0,0,0,.56), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+
+  .menu-background {
+    background-image: url(../../assets/images/sidebar-1.jpg);
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center center;
+
+    &:after {
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      content: "";
+      display: block;
+      background: #191919;
+      opacity: .8;
+    }
+  }
+}
+.normal-menu {
+  .menu {
+    width: 20%;
+  }
+  .visible-on-menu-regular {
+    display: block;
+  }
+  .visible-on-menu-mini {
+    display: none;
+  }
+}
+.mini-menu {
+  .menu {
+    width: 80px;
+  }
+  .visible-on-menu-regular {
+    display: none;
+  }
+  .visible-on-menu-mini {
+    display: block;
+  }
+}
+.main-panel {
+  position: relative;
+  float: right;
+  width: 80%;
+  transition: .33s,cubic-bezier(.685,.0473,.346,1);
+  background-color: #eee;
+}

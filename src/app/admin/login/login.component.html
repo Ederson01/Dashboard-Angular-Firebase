@@ -1,0 +1,65 @@
+<div class="login-page">
+  <notification-message></notification-message>
+  <a class="logo-link" routerLink="">
+    <img class="logo-normal" src="/assets/images/logo.png"/>
+  </a>
+  <div class="container">
+    <form class="col-md-4 col-sm-6 form-login" [formGroup]="userForm" (ngSubmit)="login()">
+      <div class="card card-login">
+        <div class="card-header text-center">
+          <h1 class="card-title">Login</h1>
+        </div>
+        <div class="card-content">
+          <div class="input-group align-items-center">
+            <i class="material-icons">face</i>
+            <mat-form-field class="example-full-width">
+              <input matInput type="email" placeholder="E-mail" id="email" name="email" formControlName="email" required autocomplete="new-password">
+              <mat-error *ngIf="formErrors.email">
+                {{ formErrors.email }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="input-group align-items-center">
+            <i class="material-icons">lock_outline</i>
+            <mat-form-field class="example-full-width">
+              <input matInput type="password" placeholder="Senha" id="password" name="password"  formControlName="password" required autocomplete="new-password">
+              <mat-error *ngIf="formErrors.password">
+                {{ formErrors.password }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn-login" [disabled]="!userForm.valid">ENTRAR</button>
+        </div>
+      </div>
+    </form>
+    <footer class="footer container">
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            Categorias
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            Quem Somos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            Horário de Ônibus
+          </a>
+        </li>
+      </ul>
+      <p class="copyright justify-content-end">
+        Copyright &copy; {{test | date: 'yyyy'}} AcheiCamanducaia - Todos Direitos Reservados
+      </p>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-text">
+          <h1>Nova Cidade</h1>
+        </div>
+      </div>
+      <form [formGroup]="cidadeForm">
+        <div class="card-body">
+          <mat-form-field class="col-sm-6">
+            <input matInput placeholder="Titulo" formControlName="title" (keyup)="slugfy($event)" (blur)="verifyCidadeSlug()">
+            <mat-hint align="start" *ngIf="slug"><strong>Referencia da cidade: </strong>{{slug}}</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="col-sm-6">
+            <input matInput placeholder="Slug" formControlName="slug" (keyup)="slugfy($event)" (blur)="verifyCidadeSlug()">
+          </mat-form-field>
+        </div>
+
+        <div class="card-body">
+          <quill-editor [style]="{height: '250px'}" formControlName="content"></quill-editor>
+        </div>
+
+        <div class="card-footer">
+          <button type="submit" class="btn-form" (click)="salvar()" mat-raised-button>Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

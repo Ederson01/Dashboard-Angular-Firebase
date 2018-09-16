@@ -1,0 +1,40 @@
+<div class="dialog-notify">
+  <button class="close-dialog" mat-dialog-close><i class="material-icons">close</i></button>
+  <h2 mat-dialog-title>Mídias</h2>
+  <div mat-dialog-content>
+    <file-drop customstyle="dropZone" (onFileDrop)="dropped($event)">
+
+      <h3>Upload Arquivo</h3>
+      <p>Araste o arquivo para adicionalo</p>
+      <div class="file">
+        <input id="file-input" class="file-input" type="file" (change)="startUpload($event.target)" multiple>
+
+        <label class="file-label" for="file-input"><i class="material-icons" multiple>save_alt</i> ou escolha o arquivo</label>
+      </div>
+    </file-drop>
+    <div class="list-images-midia">
+      <div *ngFor="let upload of uploadsService.uploads" class="image-midia col-md-2">
+        <div class="progress-bar-midia">
+          <h2>{{upload.fileName}}</h2>
+          <p>{{upload.percentage | async}}%</p>
+
+          <mat-progress-bar [color]="primary" [mode]="determinate" [value]="upload.percentage | async" [bufferValue]="100"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="formImage" class="list-images-midia">
+      <div *ngFor="let file of files | async" class="image-midia col-md-2">
+        <div class="image-content">
+          <input *ngIf="!data.type" type="radio" class="input-image" id="{{file.id}}" name="midia" [value]="file" formControlName="midia" [checked]="file.id == data.content.id">
+          <input *ngIf="data.type" type="checkbox" class="input-image" id="{{file.id}}" name="file" (change)="setImages(file, $event.target.checked)" [checked]="compareImages(file)">
+
+          <label for="{{file.id}}"><img [src]="file.url"/></label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button class="btn-cancelar"  mat-dialog-close>Cancelar</button>
+    <button mat-button class="btn-ok" (click)="closeDialog()" cdkFocusInitial>Confirmar</button>
+  </div>
+</div>

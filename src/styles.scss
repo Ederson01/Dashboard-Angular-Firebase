@@ -1,1 +1,180 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+body{
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+p {
+}
+h1 {
+  margin: 0;
+  font-size: 2.87em;
+}
+admin-pages {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
+  .main-content {
+    margin-top: 70px;
+    padding: 15px 15px;
+    min-height: calc(100vh - 123px);
+  }
+  .btn-form {
+    background: linear-gradient(60deg, #09616b, #065b65);
+    color: #fff;
+
+    &:hover {
+      box-shadow: 0px 10px 30px -8px rgba(0,0,0,0.75);
+    }
+  }
+  .btn-cancelar {
+    background: linear-gradient(60deg, #b50404, #b51f1f);
+  }
+  .color-view {
+    color: #00bcd4;
+  }
+  .color-edit {
+    color: #4caf50;
+  }
+  .color-delete {
+    color: #f44336;
+  }
+  .card-text {
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(9,97,107,.4);
+    background: linear-gradient(60deg,#09616b,#065b65);
+    float: none;
+    display: inline-block;
+    margin-right: 0;
+    border-radius: 3px;
+    padding: 15px;
+    margin-top: -20px;
+    margin-right: 15px;
+    float: left;
+
+    h1, i {
+      font-size: 1.125rem;
+      line-height: 1.4em;
+      font-weight: 300;
+      color: #fff;
+      margin-top: 0;
+    }
+  }
+  .card {
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
+    color: #333;
+    background: #fff;
+    width: 100%;
+    //height: calc(100% - 30px);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+
+    .card-header {
+      border: none;
+      padding: 10px 1.25rem;
+      background-color: transparent;
+    }
+    .card-footer {
+      background-color: transparent;
+      border: none;
+    }
+    .card-header-icon {
+      i {
+        width: 33px;
+        height: 33px;
+        text-align: center;
+        line-height: 33px;
+        font-size: 24px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        color: #3c4858;
+        font-weight: 300;
+      }
+      p {
+        color: #999;
+        font-weight: 300;
+      }
+    }
+  }
+  .mat-dialog-container {
+    position: relative;
+  }
+  table {
+    width: 100%;
+  }
+
+  tr.example-detail-row {
+    height: 0;
+  }
+
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  .example-element-description {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px;
+    width: 100%;
+  }
+  .tel-select {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+  }
+  .ps__rail-y {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+}
+.mat-button-focus-overlay {
+  background-color:transparent;
+}
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 200;
+  height: 160px;
+  border: 2px dashed #f16624;
+  border-radius: 5px;
+  background: white;
+  margin: 10px 0;
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #363636 !important;
+
+    &.hovering {
+      border: 2px solid #f16624;
+      color: #dadada !important;
+    }
+
+    .file-label {
+      font-size: 1.2em;
+    }
+    .file-input {
+      display: none;
+    }
+  }
+}
+.mat-button-focus-overlay {
+  display: none !important;
+}

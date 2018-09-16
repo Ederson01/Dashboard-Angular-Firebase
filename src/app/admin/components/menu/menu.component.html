@@ -1,0 +1,138 @@
+
+<div class="logo">
+  <div class="logo-img">
+    <a class="logo-link" routerLink="dashboard">
+      <img class="logo-normal" src="/assets/images/logo.png"/>
+      <img class="icon-logo" src="/assets/images/logo-icon.png"/>
+    </a>
+  </div>
+</div>
+
+<div class="menu-wrapper">
+  <perfect-scrollbar class="style-scroll">
+    <div class="user" *ngIf="auth.user | async as user">
+      <div class="photo">
+        <img class="card-img-top" [src]="user.photoURL ? user.photoURL.url : 'https://firebasestorage.googleapis.com/v0/b/guia-sul-de-minhas.appspot.com/o/users%2Fno-image.png?alt=media&token=929b9f49-d17b-4bdf-ac12-e2dd8b5c5e99'">
+      </div>
+      <div class="info">
+        <mat-expansion-panel class="nav-item" hideToggle>
+          <mat-expansion-panel-header  class="nav-link" collapsedHeight="auto" expandedHeight="auto">
+            <p>Olá, {{ user.nome }} {{ user.sobrenome }}</p>
+            <b class="caret"></b>
+          </mat-expansion-panel-header>
+
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="perfil" routerLinkActive="active">
+                <span class="sidebar-normal">Perfil</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="logout()">
+                <span class="sidebar-normal">Sair</span>
+              </a>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+      </div>
+    </div>
+    <div class="nav-container">
+      <ul class="nav">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="quem-somos" routerLinkActive="active">
+            <i class="material-icons">mode_comment</i>
+            <p>Quem Somos</p>
+          </a>
+        </li>
+
+        <mat-expansion-panel li class="nav-item" hideToggle>
+          <mat-expansion-panel-header  class="nav-link" collapsedHeight="auto" expandedHeight="auto">
+            <i class="material-icons">local_phone</i>
+            <p>Empresas</p>
+            <b class="caret"></b>
+          </mat-expansion-panel-header>
+
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="empresas" routerLinkActive="active">
+                <span class="sidebar-normal">Listar Empresas</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="nova-empresa" routerLinkActive="active">
+                <span class="sidebar-normal">Nova Empresa</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="empresa/categorias" routerLinkActive="active">
+                <span class="sidebar-normal">Categorias</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="empresa/tags" routerLinkActive="active">
+                <span class="sidebar-normal">Tags</span>
+              </a>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel li class="nav-item" hideToggle>
+          <mat-expansion-panel-header  class="nav-link" collapsedHeight="auto" expandedHeight="auto">
+            <i class="material-icons">domain</i>
+            <p>Cidades</p>
+            <b class="caret"></b>
+          </mat-expansion-panel-header>
+
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cidades" routerLinkActive="active">
+                <span class="sidebar-normal">Listar Cidades</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="nova-cidade" routerLinkActive="active">
+                <span class="sidebar-normal">Nova Cidade</span>
+              </a>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+
+        <!--<li class="nav-item">
+          <a class="nav-link" routerLink="usuarios" routerLinkActive="active">
+            <i class="material-icons">group</i>
+            <p>Usuários</p>
+          </a>
+        </li>-->
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="media" routerLinkActive="active">
+            <i class="material-icons">perm_media</i>
+            <p>Mídia</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="admin/dashboard">
+            <i class="material-icons">poll</i>
+            <p>Relatórios</p>
+          </a>
+        </li>
+
+        <!--<li class="nav-item">
+          <a class="nav-link" routerLink="admin/dashboard">
+            <i class="material-icons">settings</i>
+            <p>Configurações</p>
+          </a>
+        </li>-->
+      </ul>
+    </div>
+  </perfect-scrollbar>
+</div>

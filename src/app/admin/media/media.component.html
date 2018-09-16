@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-text">
+          <h1>Mídia</h1>
+        </div>
+      </div>
+      <div class="card-body">
+        <file-drop customstyle="dropZone" (onFileDrop)="dropped($event)">
+
+          <h3>Upload Arquivo</h3>
+          <p>Araste o arquivo para adicionalo</p>
+          <div class="file">
+            <input id="file-input" class="file-input" type="file" (change)="startUpload($event.target)" multiple>
+
+            <label class="file-label" for="file-input"><i class="material-icons" multiple>save_alt</i> ou escolha o arquivo</label>
+          </div>
+        </file-drop>
+        <div class="list-images-midia">
+          <div *ngFor="let upload of uploadsService.uploads" class="image-midia col-md-2">
+            <div class="progress-bar-midia">
+              <h2>{{upload.fileName}}</h2>
+              <p>{{upload.percentage | async}}%</p>
+
+              <mat-progress-bar [color]="primary" [mode]="determinate" [value]="upload.percentage | async" [bufferValue]="100">
+              </mat-progress-bar>
+            </div>
+          </div>
+        </div>
+        <div class="list-images-midia">
+          <div *ngFor="let file of files | async" class="image-midia col-md-2">
+          	<div class="image-content" (click)="infoFile(file)">
+              <img [src]="file.url"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

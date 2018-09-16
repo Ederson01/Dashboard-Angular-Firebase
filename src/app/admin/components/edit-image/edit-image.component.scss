@@ -1,0 +1,71 @@
+.dialog-notify {
+  text-align: center;
+  position: relative;
+}
+
+.dialog-danger {
+  .btn-cancelar {
+    color: #999;
+  }
+  .btn-ok {
+    color: #f55145;
+  }
+}
+.mat-button-focus-overlay {
+  background-color: transparent;
+}
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.close-dialog {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 290486px;
+  cursor: pointer;
+  display: inline-block;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 0;
+  height: 20px;
+  max-height: 20px;
+  max-width: 20px;
+  min-height: 20px;
+  min-width: 20px;
+  outline: 0;
+  position: relative;
+  vertical-align: top;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -10px;
+  top: -15px;
+
+  i {
+    font-size: 24px;
+    color: #999;
+  }
+}
+.image-content-midia {
+  background-color: #fff;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+}
+.edit-content-midia {
+  border-left: 1px solid #ddd;
+}
+.info-file {
+  text-align: left;
+  margin-bottom: 30px;
+  padding: 0px 15px;
+}

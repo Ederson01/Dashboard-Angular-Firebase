@@ -1,0 +1,221 @@
+<div class="main-content">
+  <div class="container">
+    <form [formGroup]="empresaForm" class="form-empresa d-flex align-items-start flex-wrap clearfix">
+      <div class="col-md-9">
+        <div class="card row">
+          <div class="card-header">
+            <div class="card-text">
+              <h1>Cadastro</h1>
+            </div>
+          </div>
+
+          <div class="card-body row d-flex">
+            <div class="col-6 d-inline-block border-right">
+              <mat-form-field class="col-12">
+                <input matInput placeholder="Titulo" formControlName="title" (keyup)="slugfy($event)" (blur)="verifyEmpresaSlug()">
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+                <input matInput placeholder="Slug" formControlName="slug" (keyup)="slugfy($event)" (blur)="verifyEmpresaSlug()">
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+                <input matInput placeholder="E-mail" formControlName="email">
+              </mat-form-field>
+
+              <mat-form-field class="col-9">
+                <input matInput placeholder="Endereço" formControlName="endereco">
+              </mat-form-field>
+              <mat-form-field class="col-3">
+                <input matInput placeholder="Nº" formControlName="numero">
+              </mat-form-field>
+
+              <div formArrayName="phones" class="phones-number col-12">
+                <div class="phone-empresa" *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">
+                  <mat-form-field>
+                    <input matInput placeholder="Telefone" [dropSpecialCharacters]="false" mask="(00) 0000-00000" formControlName="numero">
+                  </mat-form-field>
+
+                  <button mat-icon-button color="warn" (click)="deletePhone()" class="btn-remove-phone" [ngClass]="{'hide': i == 0}">
+                    <mat-icon aria-label="Example icon-button with a heart icon">remove</mat-icon>
+                  </button>
+                </div>
+                <button mat-mini-fab color="primary" (click)="addPhone()" class="btn-add-phone">
+                  <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="col-6 d-inline-block">
+              <mat-form-field class="col-12">
+                <mat-select placeholder="Cidade" formControlName="cidade">
+                  <mat-option *ngFor="let cidade of cidadeList | async" [value]="cidade.id" (click)="setCity(cidade.title)">{{cidade.title}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+                <mat-select placeholder="Categorias" formControlName="categorias" multiple>
+                  <mat-option *ngFor="let category of categoryList | async" [value]="category.id">{{category.title}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                    {{tag}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+
+                  <input placeholder="Tags" #tagsInput [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addTag($event)" [formControl]="tagsCtrl">
+                </mat-chip-list>
+
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let tag of filteredtags | async" [value]="tag"> {{tag}} </mat-option>
+                  <!--<mat-option *ngFor="let tag of filteredFruits" [value]="tag"> {{tag}} </mat-option>-->
+                </mat-autocomplete>
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="card row" [ngClass]="pagante ? 'd-flex' : 'd-none'">
+          <div class="card-header">
+            <div class="card-text">
+              <h1>Cliente Pagante</h1>
+            </div>
+          </div>
+          <div class="card-body row d-flex">
+            <div class="col-4 d-inline-block border-right">
+              <mat-form-field class="col-12">
+                <input matInput placeholder="Site" formControlName="site">
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+                <input matInput placeholder="Facebook" formControlName="facebook">
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+                <input matInput placeholder="WhatsApp" [dropSpecialCharacters]="false" mask="(00) 0 0000-0000" formControlName="whatsApp">
+              </mat-form-field>
+            </div>
+
+            <div class="col-8 d-inline-block">
+              <quill-editor [style]="{height: '250px'}" formControlName="descricao"></quill-editor>
+            </div>
+          </div>
+        </div>
+        <div class="card row" [ngClass]="pagante ? 'd-flex' : 'd-none'">
+          <div class="card-header">
+            <div class="card-text">
+              <h1>Mapa</h1>
+            </div>
+          </div>
+          <div class="card-body map-empresa">
+            <button mat-flat-button color="primary" (click)="findLocation()">Buscar Pelo Endereço</button>
+
+            <agm-map [(latitude)]="lat" [(longitude)]="lng" [zoom]="10" [disableDefaultUI]="true" [zoomControl]="true">
+              <agm-marker [(latitude)]="lat" [(longitude)]="lng" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+            </agm-map>
+          </div>
+        </div>
+        <div class="card row" [ngClass]="pagante ? 'd-flex' : 'd-none'">
+          <div class="card-header">
+            <div class="card-text">
+              <h1>Galeria</h1>
+            </div>
+          </div>
+          <div class="card-body gallery-empresa">
+            <div class="col-md-3">
+              <div class="add-image-gallery image-gallery" (click)="selectFile(true, 'gallery', empresaForm.value.gallery)">
+                <label><i class="material-icons">add</i></label>
+              </div>
+            </div>
+            <div class="col-md-3" *ngFor="let file of empresaForm.value.gallery; let i = index">
+              <div class="image-gallery">
+                <img [src]="file.url" class="rounded mb-3" width="180">
+                <button class="btn-remove-image" (click)="deleteMidia(i)">
+                  <i class="material-icons">clear</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card row" [ngClass]="propaganda ? 'd-flex' : 'd-none'">
+          <div class="card-header">
+            <div class="card-text">
+              <h1>Propaganda</h1>
+            </div>
+          </div>
+          <div class="card-body propaganda-empresa">
+            <div class="col-md-7 border-right images-banner">
+              <p>Banner Superior</p>
+
+              <div class="image-banner add-image-banner banner-superior" *ngIf="!empresaForm.value.bannerSuperior" (click)="selectFile(false, 'bannerSuperior', empresaForm.value.bannerSuperior)">
+                <label><i class="material-icons">add</i></label>
+              </div>
+              <div class="image-banner" *ngIf="empresaForm.value.bannerSuperior">
+                <img [src]="empresaForm.value.bannerSuperior.url" class="imgPlaceholder" (click)="selectFile(false, 'bannerSuperior', empresaForm.value.bannerSuperior)">
+
+                <button class="btn-remove-image" (click)="deletePropaganda('bannerSuperior')">
+                  <i class="material-icons">clear</i>
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-5 images-banner">
+              <p>Banner Lateral</p>
+
+              <div class="image-banner add-image-banner" *ngIf="!empresaForm.value.bannerLateral" (click)="selectFile(false, 'bannerLateral', empresaForm.value.bannerLateral)">
+                <label><i class="material-icons">add</i></label>
+              </div>
+              <div class="image-banner" *ngIf="empresaForm.value.bannerLateral">
+                <img [src]="empresaForm.value.bannerLateral.url" class="imgPlaceholder" (click)="selectFile(false, 'bannerLateral', empresaForm.value.bannerLateral)">
+
+                <button class="btn-remove-image" (click)="deletePropaganda('bannerLateral')">
+                  <i class="material-icons">clear</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-salve col-md-3">
+        <div class="card-header">
+          <div class="card-text">
+            <h1>Opções</h1>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="thumbnail-upload">
+            <div class="image-preview">
+              <img [src]="empresaForm.value.thumbnail.url" *ngIf="empresaForm.value.thumbnail" class="imgPlaceholder">
+              <i class="material-icons" *ngIf="!empresaForm.value.thumbnail">panorama</i>
+            </div>
+            <div class="image-edit" (click)="selectFile(false, 'thumbnail', empresaForm.value.thumbnail)">
+              <label><i class="material-icons">add_a_photo</i></label>
+            </div>
+          </div>
+
+          <div class="info-cadastro">
+            <mat-slide-toggle color="primary" formControlName="pagante" (change)="pagante = !pagante">Cliente Pagante</mat-slide-toggle>
+
+            <div class="empresa-capa">
+              <mat-slide-toggle class="example-margin" color="primary" formControlName="empresaCapa" (change)="capa = !capa">Empresa Capa</mat-slide-toggle>
+
+              <mat-slider formControlName="posicao" max="12" min="0" thumbLabel [ngClass]="capa ? 'd-flex' : 'd-none'"></mat-slider>
+            </div>
+
+            <mat-slide-toggle color="primary" formControlName="propaganda" (change)="propaganda = !propaganda">Cliente Propaganda</mat-slide-toggle>
+          </div>
+
+          <button mat-flat-button color="primary" (click)="salvar()">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

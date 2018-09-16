@@ -1,0 +1,87 @@
+<div class="main-content">
+  <div class="container-fluid row">
+    <div class="d-flex align-items-start flex-wrap row">
+      <div class="col-sm-5">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-text">
+              <h1>Categoria</h1>
+            </div>
+          </div>
+          <form [formGroup]="categoryEmpresaForm">
+            <div class="card-body">
+              <mat-form-field class="col-12">
+                <input matInput placeholder="Titulo" formControlName="title" (keyup)="slugfy($event)" (blur)="verifyCategorySlug()">
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+                <input matInput placeholder="Slug" formControlName="slug" (keyup)="slugfy($event)" (blur)="verifyCategorySlug()">
+              </mat-form-field>
+
+              <mat-form-field class="col-12">
+                <textarea matInput rows="10" placeholder="Descrição" formControlName="content"></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn-form" (click)="salvar()" mat-raised-button>Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-text">
+              <h1>Lista de Categorias</h1>
+            </div>
+
+            <mat-form-field class="d-flex justify-content-end">
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pesquisar">
+            </mat-form-field>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="col-12" (mouseleave)="expandedElement = any">
+                <ng-container matColumnDef="{{displayedColumns[0]}}">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header (mouseenter)="expandedElement = any"> Titulo </th>
+                  <td mat-cell *matCellDef="let element"> {{element['title']}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="{{displayedColumns[1]}}">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header (mouseenter)="expandedElement = any"> Slug </th>
+                  <td mat-cell *matCellDef="let element"> {{element['slug']}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="{{displayedColumns[2]}}">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header (mouseenter)="expandedElement = any"> Descrição </th>
+                  <td mat-cell *matCellDef="let element"> {{element['content']}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="expandedDetail">
+                  <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                      <div class="example-element-description">
+                        <button mat-icon-button (click)="editar(element)"><i class="material-icons color-edit" matTooltip="Editar">edit</i></button>
+                        <button mat-icon-button><i class="material-icons color-view" matTooltip="Visualizar">remove_red_eye</i></button>
+                        <button mat-icon-button (click)="deleteCategoria(element.id, element.title)"><i class="material-icons color-delete" matTooltip="Deletar">delete</i></button>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element" (mouseenter)="expandedElement = element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+              </table>
+
+              <mat-paginator class="d-flex justify-content-end w-100" [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
